@@ -83,6 +83,8 @@ function addedToCartMessage(productId){
   });
 }
 
+updateCartQuantity();
+
 document.querySelectorAll(".js-add-to-card-button")
     .forEach((button) => {
         button.addEventListener('click', () =>{
