@@ -3,6 +3,7 @@ import {getProduct, products} from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
+import { renderPaymentSummany } from "./paymentSummary.js";
 
 
 export function renderOrderSummary(){
@@ -114,8 +115,12 @@ export function renderOrderSummary(){
             link.addEventListener('click', () => {
                 const productId = link.dataset.productId;
                 removeFromCart(productId);
-                const cartContainer = document.querySelector(`.js-cart-container-${productId}`);
+                const cartContainer = document.querySelector(
+                    `.js-cart-container-${productId}`
+                );
                 cartContainer.remove();
+
+                renderPaymentSummany();
             });
         });
 
@@ -126,6 +131,8 @@ export function renderOrderSummary(){
                 const {productId, deliveryOptionId} = element.dataset;
                 updateDeliveryOption(productId, deliveryOptionId);
                 renderOrderSummary();
+                
+                renderPaymentSummany();
             });
         });
 }
