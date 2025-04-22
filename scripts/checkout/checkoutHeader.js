@@ -1,11 +1,12 @@
 import { cart } from "../../data/cart.js";
 
-export function renderCheckoutHeader(){
-    let cartQuantity = 0;
-      cart.forEach((cartItem) =>{
-          cartQuantity += cartItem.quantity;
-      });
-    const checkoutHeaderHTML = `
+export function renderCheckoutHeader() {
+  let cartQuantity = 0;
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+  });
+
+  const checkoutHeaderHTML = `
     <div class="header-content">
       <div class="checkout-header-left-section">
         <a href="amazon.html">
@@ -23,6 +24,10 @@ export function renderCheckoutHeader(){
     </div>
   `;
 
-  document.querySelector('.js-checkout-header')
-    .innerHTML = checkoutHeaderHTML;
+  const checkoutHeaderElement = document.querySelector('.js-checkout-header');
+  if (checkoutHeaderElement) {
+    checkoutHeaderElement.innerHTML = checkoutHeaderHTML;
+  } else {
+    console.error('The element .js-checkout-header is missing!');
+  }
 }
